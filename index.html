@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array</title>
+  </head>
+  <body>
+    <script>
+      const panier = [
+        { ref: "prod_1", prix: 340.89, qte: 4 },
+        { ref: "prod_2", prix: 44.89, qte: 7 },
+        { ref: "prod_3", prix: 3.9, qte: 9 },
+        { ref: "prod_4", prix: 77.69, qte: 14 },
+        { ref: "prod_5", prix: 66.5, qte: 40 },
+        { ref: "prod_6", prix: 77.89, qte: 3 },
+      ];
+
+      //   for (var i = 0; i < panier.length; i++) {
+      //     console.log(i, panier[i]);
+      //   }
+      //   panier.forEach(cb);
+      //   function cb(e, i, x) {
+      //     console.log("cb called.", e, i, x);
+      //   }
+
+      // Array.prototype.each = function (cb) {
+      //   for (var i = 0; i < this.length; i++) {
+      //     cb(this[i], i, this);
+      //   }
+
+      // };
+      //   panier.forEach(f);
+      //   function f(e, i, x) {
+      //     console.log("CB called.", e, i, x);
+      //   }
+
+      //   Array.prototype.myMap = function (cb) {
+      //     const result = [];
+      //     this.forEach((e, i, t) => result.push(cb(e, i, t)));
+      //     return result;
+      //   };
+
+      Array.prototype.myFilter = function (cb) {
+        const result = [];
+        this.forEach((e, i, t) => cb(e, i, t) && result.push(e));
+        return result;
+      };
+      var filtred = panier.myFilter((e) => e.qte > 10);
+
+      //   var total = panier
+      //     .myMap((e) => e.prix * e.qte)
+      //     .reduce((acc, e) => (acc += e), 0);
+
+      //   var total = st.reduce(cb, 0);
+      //   function cb(acc, e) {
+      //     return (acc += e);
+      //   }
+    </script>
+  </body>
+</html>

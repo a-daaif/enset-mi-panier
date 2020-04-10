@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objets</title>
+  </head>
+  <body>
+    <script>
+      const panierInitial = [
+        { ref: "prod_1", prix: 340.89, qte: 4 },
+        { ref: "prod_2", prix: 44.89, qte: 7 },
+        { ref: "prod_3", prix: 3.9, qte: 9 },
+        { ref: "prod_4", prix: 77.69, qte: 14 },
+        { ref: "prod_5", prix: 66.5, qte: 40 },
+        { ref: "prod_6", prix: 77.89, qte: 3 },
+      ];
+
+      const panier = {
+        date: Date.now(),
+        checkout: false,
+        items: panierInitial,
+        add(ref, prix, qte = 1) {
+          if (ref === undefined) return;
+          if (prix === undefined) return;
+          this.items.push({ ref, prix, qte });
+        },
+        remove(ref) {
+          const itemIndex = this.items.findIndex((item) => item.ref === ref);
+          if (itemIndex >= 0) this.items.splice(itemIndex, 1);
+        },
+        list() {
+          this.items.forEach((i) => console.log(i));
+        },
+        getItems() {
+          return this.items;
+        },
+
+        sortByPrice() {
+          this.items.sort(this.sf);
+        },
+
+        getTotal() {
+          return this.items
+            .map((i) => i.prix * i.qte)
+            .reduce((acc, st) => (acc += st), 0);
+        },
+        sf(e1, e2) {
+          return e2.prix - e1.prix;
+        },
+      };
+    </script>
+  </body>
+</html>
